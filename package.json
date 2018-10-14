@@ -1,0 +1,22 @@
+{
+  "name": "dingding-lib",
+  "version": "0.1.0",
+  "description": "dingding lib, dingding robot message, dingtalk",
+  "scripts": {
+    "test": "jest"
+  },
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-jest": "^23.6.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-flow": "^6.23.0",
+    "jest": "^23.6.0",
+    "jest-runner-flowtype": "^0.0.6",
+    "regenerator-runtime": "^0.12.1"
+  },
+  "dependencies": {
+    "query-string": "^6.2.0"
+  }
+}
