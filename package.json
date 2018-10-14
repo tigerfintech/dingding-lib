@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "description": "dingding lib, dingding robot message, dingtalk",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "prepublish": "node_modules/babel-cli/bin/babel.js lib --out-dir es/"
   },
-  "main": "index.js",
+  "main": "es/index.js",
   "license": "MIT",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-jest": "^23.6.0",
     "babel-preset-env": "^1.7.0",
