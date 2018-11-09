@@ -1,13 +1,19 @@
 {
   "name": "dingding-lib",
-  "version": "0.1.1",
+  "version": "1.0.0",
+  "author": "deju",
   "description": "dingding lib, dingding robot message, dingtalk",
   "scripts": {
     "test": "jest",
-    "prepublish": "node_modules/babel-cli/bin/babel.js lib --out-dir es/"
+    "prepublish": "node_modules/babel-cli/bin/babel.js src --out-dir lib/"
   },
-  "main": "es/index.js",
+  "homepage": "https://github.com/tigerfintech/dingding-lib",
+  "main": "lib/index.js",
   "license": "MIT",
+  "keywords": [
+    "dingding lib",
+    "dingtalk lib"
+  ],
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",

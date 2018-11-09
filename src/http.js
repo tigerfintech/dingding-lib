@@ -1,46 +1,33 @@
-'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
+/* @flow */
 
-var _https = require('https');
+import https from 'https';
+import queryString from 'querystring';
+import path from 'path';
 
-var _https2 = _interopRequireDefault(_https);
+const API_HOST = 'oapi.dingtalk.com';
 
-var _querystring = require('querystring');
+const SUCCESS_CODE = 0;
 
-var _querystring2 = _interopRequireDefault(_querystring);
-
-var _path = require('path');
-
-var _path2 = _interopRequireDefault(_path);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var API_HOST = 'oapi.dingtalk.com';
-
-var SUCCESS_CODE = 0;
-
-var http = {
+const http = {
 
     /**
      * param
      * @param query {Object}
      * @return {string}
      */
-    params: function params(query) {
+    params: function (query?: { [any]: any }) {
         if (!query) return '';
-        return '?' + _querystring2.default.stringify(query);
+        return '?' + queryString.stringify(query);
     },
 
-    get: function get(pathname, query) {
+    get: function (pathname: string, query?: { [any]: any }) {
 
-        return new Promise(function (resolve, reject) {
+        return new Promise((resolve, reject) => {
 
-            _https2.default.get(_path2.default.join('https://' + API_HOST, '' + pathname + http.params(query)), function (res) {
+            https.get(path.join(`https://${API_HOST}`, `${pathname}${http.params(query)}`), (res) => {
 
-                var body = '';
+                let body = '';
 
                 res.setEncoding('utf8');
                 res.on('data', function (chunk) {
@@ -48,7 +35,7 @@ var http = {
                 });
                 res.on('end', function () {
                     if (res.statusCode === 200) {
-                        var result = JSON.parse(body);
+                        const result = JSON.parse(body);
                         if (result && SUCCESS_CODE === result.errcode) {
                             resolve(result);
                         } else {
@@ -58,15 +45,19 @@ var http = {
                         reject(new Error(body));
                     }
                 });
-            }).on('error', function (e) {
+
+            }).on('error', (e) => {
                 reject(e);
             });
+
         });
+
     },
 
-    post: function post(pathname, data) {
 
-        var opts = {
+    post: function (pathname: string, data?: { [any]: any }) {
+
+        const opts = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -76,10 +67,10 @@ var http = {
             path: pathname
         };
 
-        return new Promise(function (resolve, reject) {
+        return new Promise((resolve, reject) => {
 
-            var req = _https2.default.request(opts, function (res) {
-                var body = '';
+            const req = https.request(opts, (res) => {
+                let body = '';
 
                 res.setEncoding('utf8');
                 res.on('data', function (chunk) {
@@ -88,7 +79,7 @@ var http = {
                 res.on('end', function () {
 
                     if (res.statusCode === 200) {
-                        var result = JSON.parse(body);
+                        const result = JSON.parse(body);
                         if (result && SUCCESS_CODE === result.errcode) {
                             resolve(result);
                         } else {
@@ -97,16 +88,18 @@ var http = {
                     } else {
                         reject(new Error(body));
                     }
+                    
                 });
             });
 
-            req.on('error', function (e) {
+            req.on('error', (e) => {
                 reject(e);
             });
             req.write(JSON.stringify(data));
             req.end();
-        });
-    }
-};
 
-exports.default = http;
+        })
+    }
+}
+
+export default http;

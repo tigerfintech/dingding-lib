@@ -1,12 +1,19 @@
 
 ## Related
-    https://open-doc.dingtalk.com/docs/doc.htm?spm=a219a.7629140.0.0.1ed14a97oOZVAo&treeId=257&articleId=105735&docType=1
+[钉钉机器人文档](https://open-doc.dingtalk.com/docs/doc.htm?spm=a219a.7629140.0.0.1ed14a97oOZVAo&treeId=257&articleId=105735&docType=1)
+
+
+## Install
+
+    yarn add dingding-lib
+    or 
+    npm i dingding-lib
 
 ## Usage
 
 ### 1, robot message
     
-    import { message, api } from './';
+    import { message, api } from 'dingding-lib';
 
     // 1, text message
     api.sendRobotMsg(
